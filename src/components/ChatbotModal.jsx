@@ -5,6 +5,7 @@ export default function ChatbotModal({ show, handleClose }) {
   const [message, setMessage] = useState('');
   const [allMessages, setAllMessages] = useState([]);
 
+
   const sendMessage = async (e) => {
     e.preventDefault();
     const API_URL = "https://api.openai.com/v1/chat/completions";
@@ -29,7 +30,6 @@ export default function ChatbotModal({ show, handleClose }) {
         messages: messagesToSend
       })
     })
-
     const data = await response.json();
 
     if (data) {
@@ -43,31 +43,27 @@ export default function ChatbotModal({ show, handleClose }) {
 
   }
   return (
-    <>
-      <Modal show={show} onHide={handleClose} size="lg" >
-        <Modal.Header closeButton className="fs-4" >
-          AI Chatbot
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            {allMessages.map((msg, index) => (
-              <p key={index} ><strong>{msg.role}:</strong> {msg.content}</p>
-            ))}
-          </div>
+    <Modal show={show} onHide={handleClose} size="lg" >
+      <Modal.Header closeButton className="fs-4" >
+        AI Chatbot
+      </Modal.Header>
+      <Modal.Body>
+        <div>
+          {allMessages.map((msg, index) => (
+            <p key={index} ><strong>{msg.role}</strong> {msg.content} </p>
+          ))}
+        </div>
 
-          <Form onSubmit={sendMessage}>
-            <Form.Control
-              type="text"
-              placeholder="Ask chatbot something..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-
-            <Button type="submit" className="mt-3" >Send</Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    </>
-  );
-
+        <Form onSubmit={sendMessage} >
+          <Form.Control
+            type="text"
+            placeholder="Ask chatbot something"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <Button type="submit" className="mt-3" >Ask</Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
+  )
 }

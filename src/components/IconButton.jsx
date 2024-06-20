@@ -4,7 +4,7 @@ export default function IconButton({ isTop, className, onClick, text }) {
   let margin = "";
 
   if (isTop) {
-    margin = `light rounded-pill`;
+    margin = `light rounded-pill my-3 `;
   } else {
     margin = `light rounded-pill`;
   }
